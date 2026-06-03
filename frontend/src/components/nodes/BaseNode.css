@@ -1,0 +1,210 @@
+/* BaseNode.css */
+
+.node-container {
+  width: 220px;
+  min-height: 90px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 12px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 13px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.2s;
+  border: 1.5px solid #e5e7eb;
+}
+
+.node-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+}
+
+/* Header style */
+.node-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding-bottom: 6px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #1f2937;
+}
+
+.node-icon {
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Description styling */
+.node-description {
+  font-size: 11px;
+  color: #6b7280;
+  line-height: 1.4;
+}
+
+/* Dynamic fields form styling */
+.node-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.node-field-label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-weight: 500;
+  font-size: 11px;
+  color: #4b5563;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.node-input-field,
+.node-select-field,
+.node-textarea-field {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 8px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #374151;
+  background-color: #fafafa;
+  transition: border-color 0.15s, background-color 0.15s;
+  outline: none;
+}
+
+.node-input-field:focus,
+.node-select-field:focus,
+.node-textarea-field:focus {
+  border-color: currentColor;
+  background-color: #ffffff;
+}
+
+.node-textarea-field {
+  resize: vertical;
+  min-height: 50px;
+}
+
+/* Node Handle styles override */
+.react-flow__handle {
+  width: 10px;
+  height: 10px;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+  transition: background-color 0.15s, transform 0.15s;
+}
+
+.react-flow__handle:hover {
+  transform: scale(1.3);
+}
+
+/* Color Coding Themes */
+.node-input {
+  border-color: #10b981;
+}
+.node-input:hover {
+  border-color: #059669;
+}
+.node-input .node-header {
+  color: #065f46;
+}
+.node-input .node-input-field,
+.node-input .node-select-field {
+  color: #065f46;
+}
+
+.node-output {
+  border-color: #ef4444;
+}
+.node-output:hover {
+  border-color: #dc2626;
+}
+.node-output .node-header {
+  color: #991b1b;
+}
+.node-output .node-input-field,
+.node-output .node-select-field {
+  color: #991b1b;
+}
+
+.node-llm {
+  border-color: #6366f1;
+}
+.node-llm:hover {
+  border-color: #4f46e5;
+}
+.node-llm .node-header {
+  color: #3730a3;
+}
+
+.node-text {
+  border-color: #f59e0b;
+}
+.node-text:hover {
+  border-color: #d97706;
+}
+.node-text .node-header {
+  color: #92400e;
+}
+.node-text .node-input-field,
+.node-text .node-textarea-field {
+  color: #92400e;
+}
+
+.node-prompt {
+  border-color: #06b6d4;
+}
+.node-prompt:hover {
+  border-color: #0891b2;
+}
+.node-prompt .node-header {
+  color: #155e75;
+}
+
+.node-url {
+  border-color: #14b8a6;
+}
+.node-url:hover {
+  border-color: #0d9488;
+}
+.node-url .node-header {
+  color: #0f766e;
+}
+
+.node-database {
+  border-color: #8b5cf6;
+}
+.node-database:hover {
+  border-color: #7c3aed;
+}
+.node-database .node-header {
+  color: #5b21b6;
+}
+
+.node-file {
+  border-color: #0ea5e9;
+}
+.node-file:hover {
+  border-color: #0284c7;
+}
+.node-file .node-header {
+  color: #075985;
+}
+
+.node-agent {
+  border-color: #d946ef;
+}
+.node-agent:hover {
+  border-color: #c084fc;
+}
+.node-agent .node-header {
+  color: #86198f;
+}
