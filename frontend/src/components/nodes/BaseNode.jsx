@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Handle, Position } from 'reactflow';
-import { useStore } from '../../store';
+import { CanvasContext } from '../Canvas/Canvas';
 import { nodeConfigs } from '../../utils/constants';
 import './BaseNode.css';
 
@@ -27,6 +27,7 @@ const nodeIcons = {
  * @param {Object} [props.config] - Optional config override.
  * @param {Object} props.data - Node data state.
  * @param {Function} [props.onDataChange] - Callback triggered when fields change.
+ * @param {React.ReactNode} [props.children] - Nested custom component elements.
  */
 export const BaseNode = ({
   id,
@@ -40,8 +41,10 @@ export const BaseNode = ({
   const nodeType = type || data?.nodeType;
   const config = propConfig || nodeConfigs[nodeType];
 
-  // Sync to store
-  const updateNodeField = useStore((state) => state.updateNodeField);
+  // Retrieve canvas state context
+  const context = useContext(CanvasContext);
+  const updateNode = context?.updateNode;
+  const removeNode = context?.removeNode;
 
   if (!config) {
     return (
@@ -52,8 +55,8 @@ export const BaseNode = ({
   }
 
   const handleFieldChange = (fieldName, value) => {
-    if (updateNodeField) {
-      updateNodeField(id, fieldName, value);
+    if (updateNode) {
+      updateNode(id, { [fieldName]: value });
     }
     if (onDataChange) {
       onDataChange(fieldName, value);
@@ -84,6 +87,15 @@ export const BaseNode = ({
       <div className="node-header">
         <span className="node-icon">{icon}</span>
         <span>{config.label}</span>
+        {removeNode && (
+          <button
+            onClick={() => removeNode(id)}
+            className="node-delete-btn"
+            title="Delete Node"
+          >
+            &times;
+          </button>
+        )}
       </div>
 
       {/* Node Description */}

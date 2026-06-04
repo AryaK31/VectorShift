@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Handle, Position, useUpdateNodeInternals } from 'reactflow';
 import { BaseNode } from './BaseNode';
 import { useVariableParser } from '../../hooks/useVariableParser';
 import { nodeConfigs } from '../../utils/constants';
+import { CanvasContext } from '../Canvas/Canvas';
 
 /**
  * TextNode Component
@@ -12,6 +13,8 @@ import { nodeConfigs } from '../../utils/constants';
  */
 export const TextNode = ({ id, data, onDataChange }) => {
   const updateNodeInternals = useUpdateNodeInternals();
+  const context = useContext(CanvasContext);
+  const updateNode = context?.updateNode;
 
   // Bind directly to global data.text, defaulting to '{{input}}'
   const [text, setText] = useState(data?.text ?? '{{input}}');
@@ -24,11 +27,14 @@ export const TextNode = ({ id, data, onDataChange }) => {
   // Sync default value to store if not present on mount
   useEffect(() => {
     if (data && data.text === undefined) {
+      if (updateNode) {
+        updateNode(id, { text: '{{input}}' });
+      }
       if (onDataChange) {
         onDataChange('text', '{{input}}');
       }
     }
-  }, [data, onDataChange]);
+  }, [data, id, onDataChange, updateNode]);
 
   // Recalculate dynamic handle positions in React Flow's DOM cache when variables update
   useEffect(() => {
@@ -39,6 +45,9 @@ export const TextNode = ({ id, data, onDataChange }) => {
   const handleTextChange = (e) => {
     const val = e.target.value;
     setText(val);
+    if (updateNode) {
+      updateNode(id, { text: val });
+    }
     if (onDataChange) {
       onDataChange('text', val);
     }

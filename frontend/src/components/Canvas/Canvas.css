@@ -1,0 +1,19 @@
+/* Canvas.css */
+
+.canvas-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: #f9fafb;
+}
+
+.reactflow-container {
+  flex-grow: 1;
+  height: 70vh;
+  position: relative;
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}

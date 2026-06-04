@@ -108,55 +108,55 @@
 
 /* Color Coding Themes */
 .node-input {
-  border-color: #10b981;
+  border-color: #3b82f6;
 }
 .node-input:hover {
-  border-color: #059669;
+  border-color: #2563eb;
 }
 .node-input .node-header {
-  color: #065f46;
+  color: #1e3a8a;
 }
 .node-input .node-input-field,
 .node-input .node-select-field {
-  color: #065f46;
+  color: #1e3a8a;
 }
 
 .node-output {
-  border-color: #ef4444;
+  border-color: #10b981;
 }
 .node-output:hover {
-  border-color: #dc2626;
+  border-color: #059669;
 }
 .node-output .node-header {
-  color: #991b1b;
+  color: #065f46;
 }
 .node-output .node-input-field,
 .node-output .node-select-field {
-  color: #991b1b;
+  color: #065f46;
 }
 
 .node-llm {
-  border-color: #6366f1;
+  border-color: #8b5cf6;
 }
 .node-llm:hover {
-  border-color: #4f46e5;
+  border-color: #7c3aed;
 }
 .node-llm .node-header {
-  color: #3730a3;
+  color: #4c1d95;
 }
 
 .node-text {
-  border-color: #f59e0b;
+  border-color: #f97316;
 }
 .node-text:hover {
-  border-color: #d97706;
+  border-color: #ea580c;
 }
 .node-text .node-header {
-  color: #92400e;
+  color: #7c2d12;
 }
 .node-text .node-input-field,
 .node-text .node-textarea-field {
-  color: #92400e;
+  color: #7c2d12;
 }
 
 .node-prompt {
@@ -207,4 +207,20 @@
 }
 .node-agent .node-header {
   color: #86198f;
+}
+
+.node-delete-btn {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: #9ca3af;
+  font-size: 18px;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 4px;
+  transition: color 0.15s;
+}
+
+.node-delete-btn:hover {
+  color: #ef4444;
 }

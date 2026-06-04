@@ -1,13 +1,9 @@
-import { PipelineToolbar } from './toolbar';
-import { PipelineUI } from './ui';
-import { SubmitButton } from './submit';
+import { Canvas } from './components/Canvas/Canvas';
 
 function App() {
   return (
     <div>
-      <PipelineToolbar />
-      <PipelineUI />
-      <SubmitButton />
+      <Canvas />
     </div>
   );
 }
