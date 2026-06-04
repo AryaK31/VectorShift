@@ -130,14 +130,7 @@ export const nodeConfigs = {
         id: 'output',
       }
     ],
-    fields: [
-      {
-        name: 'text',
-        label: 'Text',
-        type: 'textarea', // Phase 4 text area configuration
-        defaultValue: '{{input}}',
-      }
-    ]
+    fields: []
   },
   prompt: {
     type: 'prompt',

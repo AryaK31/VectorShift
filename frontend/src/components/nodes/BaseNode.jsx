@@ -34,6 +34,7 @@ export const BaseNode = ({
   config: propConfig,
   data,
   onDataChange,
+  children,
 }) => {
   // Resolve type and configuration
   const nodeType = type || data?.nodeType;
@@ -142,6 +143,9 @@ export const BaseNode = ({
           })}
         </div>
       )}
+
+      {/* Custom children injected from wrapper components */}
+      {children}
     </div>
   );
 };
