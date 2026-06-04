@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Handle, Position } from 'reactflow';
+import { Handle, Position, useUpdateNodeInternals } from 'reactflow';
 import { BaseNode } from './BaseNode';
 import { useVariableParser } from '../../hooks/useVariableParser';
 import { nodeConfigs } from '../../utils/constants';
@@ -11,6 +11,8 @@ import { nodeConfigs } from '../../utils/constants';
  * corresponding target (input) handles dynamically along the left edge.
  */
 export const TextNode = ({ id, data, onDataChange }) => {
+  const updateNodeInternals = useUpdateNodeInternals();
+
   // Bind directly to global data.text, defaulting to '{{input}}'
   const [text, setText] = useState(data?.text ?? '{{input}}');
   
@@ -27,6 +29,11 @@ export const TextNode = ({ id, data, onDataChange }) => {
       }
     }
   }, [data, onDataChange]);
+
+  // Recalculate dynamic handle positions in React Flow's DOM cache when variables update
+  useEffect(() => {
+    updateNodeInternals(id);
+  }, [id, variables, updateNodeInternals]);
 
   // Sync state with parent store
   const handleTextChange = (e) => {
