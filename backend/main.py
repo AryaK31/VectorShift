@@ -1,13 +1,17 @@
+# pyrefly: ignore [missing-import]
 from fastapi import FastAPI, HTTPException
+# pyrefly: ignore [missing-import]
 from fastapi.middleware.cors import CORSMiddleware
 from pipelines.parse import is_dag
+import os
 
 app = FastAPI()
 
-# Add CORS Middleware to allow requests from the React frontend port
+# Add CORS Middleware to allow requests from explicit origins
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000,http://localhost:5173").split(",")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -19,10 +23,6 @@ def read_root():
 
 @app.post('/pipelines/parse')
 def parse_pipeline(request: dict):
-    # Validate request structure
-    if not isinstance(request, dict):
-        raise HTTPException(status_code=400, detail="Malformed JSON structure. Expected a dictionary object.")
-    
     nodes = request.get('nodes', [])
     edges = request.get('edges', [])
 
@@ -57,6 +57,13 @@ def parse_pipeline(request: dict):
         
         source = edge['source']
         target = edge['target']
+        
+        # Verify edge is not a self-loop
+        if source == target:
+            raise HTTPException(
+                status_code=400,
+                detail="Self-loop edges are not allowed in a DAG"
+            )
         
         # Verify node references exist
         if source not in node_ids:
