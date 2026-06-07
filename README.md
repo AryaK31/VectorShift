@@ -6,7 +6,7 @@ Built with a **React + React Flow** frontend and a **FastAPI** backend validatio
 
 ---
 
-## 📖 Table of Contents
+## Table of Contents
 1. [Key Features](#-key-features)
 2. [Visual Design & UX Highlights](#-visual-design--ux-highlights)
 3. [Repository Structure](#-repository-structure)
