@@ -156,7 +156,11 @@
 }
 
 .submit-modal-close-btn:hover {
-  background-color: #2563eb;
+  filter: brightness(0.9);
+}
+
+.submit-modal-close-btn:active {
+  filter: brightness(0.8);
 }
 
 @keyframes modal-fade-in {

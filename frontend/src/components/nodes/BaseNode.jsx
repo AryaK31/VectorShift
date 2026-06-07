@@ -4,18 +4,7 @@ import { CanvasContext } from '../Canvas/Canvas';
 import { nodeConfigs } from '../../utils/constants';
 import './BaseNode.css';
 
-// SVG or Emoji icons mapped by nodeType
-const nodeIcons = {
-  input: '📥',
-  output: '📤',
-  llm: '🧠',
-  text: '📝',
-  prompt: '💡',
-  url: '🔗',
-  database: '🗄️',
-  file: '📁',
-  agent: '🤖',
-};
+
 
 /**
  * BaseNode Component
@@ -63,8 +52,6 @@ export const BaseNode = ({
     }
   };
 
-  const icon = nodeIcons[nodeType] || '⚙️';
-
   return (
     <div className={`node-container node-${nodeType}`}>
       {/* Target/Source Handles */}
@@ -85,7 +72,6 @@ export const BaseNode = ({
 
       {/* Node Header */}
       <div className="node-header">
-        <span className="node-icon">{icon}</span>
         <span>{config.label}</span>
         {removeNode && (
           <button

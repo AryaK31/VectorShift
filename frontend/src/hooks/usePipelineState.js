@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react';
 import { applyNodeChanges, applyEdgeChanges, addEdge as rfAddEdge } from 'reactflow';
+import { nodeConfigs } from '../utils/constants';
 
 /**
  * usePipelineState Custom Hook
@@ -21,11 +22,32 @@ export const usePipelineState = () => {
 
   const addNode = (type, position) => {
     const newId = generateID(type);
+    
+    // Pre-populate default values from node configuration
+    const config = nodeConfigs[type];
+    const initialData = { id: newId, nodeType: type };
+    
+    if (config) {
+      if (config.fields) {
+        config.fields.forEach((field) => {
+          if (field.getDefaultValue) {
+            initialData[field.name] = field.getDefaultValue(newId);
+          } else if (field.defaultValue !== undefined) {
+            initialData[field.name] = field.defaultValue;
+          }
+        });
+      }
+      // Special case: text node text data defaults to '{{input}}'
+      if (type === 'text') {
+        initialData.text = '{{input}}';
+      }
+    }
+
     const newNode = {
       id: newId,
       type,
       position,
-      data: { id: newId, nodeType: type },
+      data: initialData,
     };
     setNodes((prev) => [...prev, newNode]);
     return newId;

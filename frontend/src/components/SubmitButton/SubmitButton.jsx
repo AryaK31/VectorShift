@@ -98,7 +98,7 @@ export const SubmitButton = () => {
         title={nodes.length === 0 ? 'Add nodes to submit the pipeline' : 'Submit pipeline structure'}
       >
         {loading && <span className="submit-spinner" />}
-        {loading ? 'Analyzing Graph...' : 'Submit Pipeline'}
+        {loading ? 'Analyzing Graph...' : 'Submit'}
       </button>
 
       {/* Styled React Modal Overlay */}
@@ -107,10 +107,10 @@ export const SubmitButton = () => {
           <div className="submit-modal-content" onClick={(e) => e.stopPropagation()}>
             {modalError ? (
               <>
-                <span className="submit-modal-status-icon">⚠️</span>
+
                 <h3 className="submit-modal-title">Submission Failed</h3>
                 <p className="submit-modal-message">
-                  {modalError.includes('Failed to fetch') 
+                  {modalError.includes('Failed to fetch')
                     ? 'Could not connect to backend. Make sure the FastAPI backend is running on http://localhost:8000.'
                     : modalError
                   }
@@ -120,7 +120,7 @@ export const SubmitButton = () => {
               <>
                 {modalData.is_dag ? (
                   <>
-                    <span className="submit-modal-status-icon">✅</span>
+
                     <h3 className="submit-modal-title" style={{ color: '#10b981' }}>Pipeline Validated</h3>
                     <p className="submit-modal-message">
                       Your graph structure is correct and contains no feedback loops. It is a valid Directed Acyclic Graph (DAG).
@@ -128,7 +128,7 @@ export const SubmitButton = () => {
                   </>
                 ) : (
                   <>
-                    <span className="submit-modal-status-icon">🚨</span>
+
                     <h3 className="submit-modal-title" style={{ color: '#ef4444' }}>Cycle Detected</h3>
                     <p className="submit-modal-message">
                       Feedback loops were found in your pipeline! All connected paths have been highlighted in red.
@@ -147,8 +147,8 @@ export const SubmitButton = () => {
                   </div>
                   <div className="submit-modal-detail-row">
                     <span className="submit-modal-detail-label">Is DAG Structure:</span>
-                    <span 
-                      className="submit-modal-detail-value" 
+                    <span
+                      className="submit-modal-detail-value"
                       style={{ color: modalData.is_dag ? '#10b981' : '#ef4444' }}
                     >
                       {modalData.is_dag ? 'Yes' : 'No'}
@@ -158,16 +158,16 @@ export const SubmitButton = () => {
               </>
             ) : null}
 
-            <button 
-              type="button" 
-              onClick={handleCloseModal} 
+            <button
+              type="button"
+              onClick={handleCloseModal}
               className="submit-modal-close-btn"
               style={{
-                backgroundColor: modalError 
-                  ? '#ef4444' 
-                  : modalData?.is_dag 
-                  ? '#10b981' 
-                  : '#f97316'
+                backgroundColor: modalError
+                  ? '#ef4444'
+                  : modalData?.is_dag
+                    ? '#10b981'
+                    : '#f97316'
               }}
             >
               Close

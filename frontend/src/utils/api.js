@@ -16,8 +16,14 @@ export const submitPipeline = async (nodes, edges) => {
   });
 
   if (!response.ok) {
-    const errText = await response.text();
-    throw new Error(errText || `Server responded with status code ${response.status}`);
+    let errMessage;
+    try {
+      const errJson = await response.json();
+      errMessage = errJson.detail || JSON.stringify(errJson);
+    } catch {
+      errMessage = await response.text();
+    }
+    throw new Error(errMessage || `Server responded with status code ${response.status}`);
   }
 
   return await response.json();

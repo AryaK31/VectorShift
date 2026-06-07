@@ -1,6 +1,17 @@
 /* BaseNode.css */
 
+/* Reset React Flow default node type styling to prevent double borders and incorrect handle positioning */
+.react-flow__node-input,
+.react-flow__node-output {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  width: auto !important;
+}
+
 .node-container {
+  position: relative;
   width: 220px;
   min-height: 90px;
   background-color: #ffffff;
